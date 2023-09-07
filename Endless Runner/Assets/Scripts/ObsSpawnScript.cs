@@ -6,15 +6,16 @@ public class ObsSpawnScript : MonoBehaviour
 {
     public GameObject obstacleGrp;
     public bool isSpawned = false;
-    public Transform player;
+    public Transform playerPos; public Rigidbody player;
     public float playerObsGrpDiff;
     public Vector3 ObsOffsetFromPrev;
-    public int timeBeforeDestruct=1;
+    public int timeBeforeDestruct=5;
+    public int maxGrpCapacity=5;
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z - player.position.z < playerObsGrpDiff && isSpawned==false)
+        if (transform.position.z - playerPos.position.z < playerObsGrpDiff && isSpawned==false)
         {
             //Debug.Log(transform.position.z - player.position.z);
             Spawn();
@@ -23,10 +24,9 @@ public class ObsSpawnScript : MonoBehaviour
 
     public void Spawn()
     {
-        
-        Debug.Log("Spawned");
+        Debug.Log("Spawned grp ");
         Instantiate(obstacleGrp, transform.position+ ObsOffsetFromPrev, transform.rotation);
         isSpawned = true;
-        Destroy(obstacleGrp,timeBeforeDestruct);
+        if(player.position.z > transform.position.z) Destroy(obstacleGrp, timeBeforeDestruct);
     }
 }

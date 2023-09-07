@@ -21,7 +21,6 @@ public class PausedScript : MonoBehaviour
 
         //sets placeholder text in sensi input
         acceleration.text = PlayerPrefs.GetFloat("Acceleration", 2000).ToString();
-        
     }
 
     // Update is called once per frame
